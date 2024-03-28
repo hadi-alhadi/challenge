@@ -1,0 +1,31 @@
+version: '3.8'
+services:
+  # Laravel backend service
+  app:
+    build:
+      context: ./image-carousel-api-laravel
+      dockerfile: Dockerfile
+    volumes:
+      - ./image-carousel-api-laravel:/var/www
+    ports:
+      - "8000:80"
+    networks:
+      - app-network
+
+  # React frontend service
+  frontend:
+    build:
+      context: ./image-carousel-react
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_API_URL=http://app:8000/api
+    networks:
+      - app-network
+    depends_on:
+      - app
+
+networks:
+  app-network:
+    driver: bridge
