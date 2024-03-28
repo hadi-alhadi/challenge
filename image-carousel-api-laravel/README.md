@@ -37,10 +37,9 @@ cd project-name
 ```bash
 composer install
 ```
-4. Build and run the Docker container
+4. Start the local development server, port 8000
 ```bash
-docker build -t project-name .
-docker run -p 9000:9000 project-name
+php artisan serve
 ```
 
 ### Usage
